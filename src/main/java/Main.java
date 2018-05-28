@@ -1,4 +1,4 @@
-package GraphicsInterface;
+import org.uma.bdbio2018.gui.Window;
 
 public class Main {
 	
