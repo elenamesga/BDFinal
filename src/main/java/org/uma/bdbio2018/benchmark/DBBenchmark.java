@@ -11,7 +11,7 @@ public class DBBenchmark {
 
     private long executingStatementDuration;
 
-    private DBBenchmark(Executor executor) throws Exception {
+    private DBBenchmark(Executor executor) {
         this.executingStatementDuration = executor.executingStatementDuration;
     }
 
@@ -36,9 +36,9 @@ public class DBBenchmark {
          * Executes the provided query computing its duration.
          * @param query String-represented query statement.
          * @return DBBenchmark object with the information of the query execution.
-         * @throws Exception when query execution fails.
+         * @throws BenchmarkException when query execution fails.
          */
-        public DBBenchmark executeQuery(String query) throws Exception {
+        public DBBenchmark executeQuery(String query) throws BenchmarkException {
             long beforeExec = System.currentTimeMillis();
             connection.executeQuery(query);
             long afterExec = System.currentTimeMillis();
