@@ -124,3 +124,6 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
+
+src/main/resources/*
+!src/main/resources/databases.example.properties

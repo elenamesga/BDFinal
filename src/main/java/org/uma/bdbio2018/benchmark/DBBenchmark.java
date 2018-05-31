@@ -20,8 +20,8 @@ public class DBBenchmark {
     }
 
     /**
-     * Orchestrator of the benchmark.
-     * Wraps the query execution in order to obtain information of it.
+     * Orchestrator of the benchmark. Wraps the query execution in order to obtain information of
+     * it.
      */
     public static class Executor {
 
@@ -34,6 +34,7 @@ public class DBBenchmark {
 
         /**
          * Executes the provided query computing its duration.
+         *
          * @param query String-represented query statement.
          * @return DBBenchmark object with the information of the query execution.
          * @throws BenchmarkException when query execution fails.

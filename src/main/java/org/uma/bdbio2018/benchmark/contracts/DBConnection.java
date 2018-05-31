@@ -11,6 +11,7 @@ public interface DBConnection extends Closeable {
 
     /**
      * Executes a query.
+     *
      * @param query String-represented query statement.
      * @throws BenchmarkException when query execution fails.
      */
