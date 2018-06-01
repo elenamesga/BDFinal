@@ -1,6 +1,6 @@
 package org.uma.bdbio2018.benchmark.contracts;
 
-import java.io.Closeable;
+import org.uma.bdbio2018.benchmark.BenchmarkException;
 
 /**
  * Interface for DBMS connections.
@@ -8,5 +8,12 @@ import java.io.Closeable;
  * @author Miguel González <sosa@uma.es>
  */
 public interface DBConnection extends Closeable {
-    void executeQuery(String query);
+
+    /**
+     * Executes a query.
+     *
+     * @param query String-represented query statement.
+     * @throws BenchmarkException when query execution fails.
+     */
+    void executeQuery(String query) throws BenchmarkException;
 }
