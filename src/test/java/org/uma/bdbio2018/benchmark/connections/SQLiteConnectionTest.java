@@ -13,12 +13,11 @@ import org.uma.bdbio2018.benchmark.BenchmarkException;
  **/
 public class SQLiteConnectionTest {
 
-    private Properties props;
     private SQLiteConnection sqlite;
 
     @Before
     public void init() throws BenchmarkException {
-        props = new Properties();
+        Properties props = new Properties();
 
         try (InputStream input = new FileInputStream(
                 "./src/main/resources/databases.properties")) {

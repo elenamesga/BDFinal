@@ -15,12 +15,11 @@ import org.uma.bdbio2018.benchmark.BenchmarkException;
  **/
 public class MySQLConnectionTest {
 
-    private Properties props;
     private MySQLConnection msqlc;
 
     @Before
     public void init() throws BenchmarkException {
-        props = new Properties();
+        Properties props = new Properties();
 
         try (InputStream input = new FileInputStream(
                 "./src/main/resources/databases.properties")) {
