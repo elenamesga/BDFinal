@@ -10,6 +10,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
+/**
+* @author Elena Espinosa Garcia 
+*/
+
 public class Window extends JFrame {
 
     //Definicion de botones
