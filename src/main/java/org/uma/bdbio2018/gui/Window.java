@@ -1,5 +1,5 @@
 package org.uma.bdbio2018.gui;
-
+import org.uma.bdbio2018.benchmark.DBConnectionFactory;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -9,10 +9,19 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import java.util.Properties;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import org.uma.bdbio2018.benchmark.contracts.DBConnection;
+import org.uma.bdbio2018.benchmark.DBBenchmark;
+import org.uma.bdbio2018.benchmark.BenchmarkException;
+import java.awt.event.*;
+
 
 /**
-* @author Elena Espinosa Garcia
-*/
+ * @author Elena Espinosa Garcia
+ */
 
 public class Window extends JFrame {
 
@@ -27,7 +36,7 @@ public class Window extends JFrame {
 
     JCheckBox checkbox; //optimize database
 
-    JComboBox<String> combobox1; // check database manager
+    JComboBox combobox1; // check database manager
     JComboBox<String> combobox2; //check database language
 
     GridBagConstraints constraints; // elements position
@@ -75,15 +84,16 @@ public class Window extends JFrame {
         combobox1 = new JComboBox();
         combobox1.addItem("Check database manager");
 
-        combobox1.addItem("Mariadb");
+        combobox1.addItem("mariadb");
         combobox1.addItem("Mysql");
-        combobox1.addItem("postgres");
+        combobox1.addItem("postgresql");
         combobox1.addItem("sqlite");
 
         combobox2 = new JComboBox();
         combobox2.addItem("Type of request");
         combobox2.addItem("Xquery");
         combobox2.addItem("Sql");
+
 
     }
 
@@ -94,9 +104,15 @@ public class Window extends JFrame {
     }
 
     public void EventsConfiguration() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //exist.addActionListener(new EventoSalir());
-        //hay que seguir añadiendo eventos a los botones.
+
+        send.addActionListener(new Eventos());
+        send.setActionCommand("send");
+        combobox1.addActionListener(new Eventos());
+        exist.addActionListener(new Eventos());
+        exist.setActionCommand("exist");
+        delete.addActionListener(new Eventos());
+        delete.setActionCommand("delete");
+
     }
 
     public void PositionComponents() {
@@ -113,11 +129,13 @@ public class Window extends JFrame {
         constraints.gridheight = 1;
         this.getContentPane().add(send, constraints);
 
+
         constraints.gridx = 1;
         constraints.gridy = 4;
         constraints.gridheight = 2;
         constraints.gridwidth = 2;
         this.getContentPane().add(textarea1, constraints);
+
 
         constraints.gridx = 4;
         constraints.gridy = 4;
@@ -137,11 +155,13 @@ public class Window extends JFrame {
         constraints.gridwidth = 1;
         this.getContentPane().add(checkbox, constraints);
 
+
         constraints.gridx = 4;
         constraints.gridy = 0;
         constraints.gridheight = 1;
         constraints.gridwidth = 1;
         this.getContentPane().add(exist, constraints);
+
 
         constraints.gridx = 1;
         constraints.gridy = 1;
@@ -151,5 +171,80 @@ public class Window extends JFrame {
 
     }
 
-}
+    private class Eventos implements ActionListener {
 
+
+        public void actionPerformed(ActionEvent e)  {
+
+            DBConnection conection;
+            Boolean optimized= true;
+
+            Properties databaseConf = new Properties();
+
+            try (InputStream input = new FileInputStream(
+                    "./src/main/java/org.uma.bdbio2018/gui/databases.properties")) {
+
+                databaseConf.load(input);
+                DBConnectionFactory ConectionFactory= new DBConnectionFactory(databaseConf);
+
+                if (e.getActionCommand().equals("send")) {
+
+                    String consulta = textarea1.getText();
+                    String gestor= null;
+
+                    try{
+
+                        if(combobox1.getSelectedItem() == "Mysql"){
+
+                            gestor = "mysql";
+                        }
+
+                        else if(combobox1.getSelectedItem() == "mariadb"){
+
+                            gestor = "mariadb";
+                        }
+
+                        else if(combobox1.getSelectedItem() == "postgresql"){
+
+                            gestor = "postgresql";
+                        }
+
+                        else if(combobox1.getSelectedItem() == "sqlite"){
+
+                            gestor = "sqlite";
+                        }
+
+                        else{;}
+
+                        conection = ConectionFactory.makeConnection(gestor, optimized);
+                        DBBenchmark.Executor ex = new DBBenchmark.Executor(conection);
+                        ex.executeQuery(consulta);
+
+                    } catch(BenchmarkException exception){
+
+                        exception.printStackTrace();
+
+                    }
+
+                } else if (e.getActionCommand().equals("exist")) {
+
+                    System.exit(0);
+
+                    System.exit(0);
+
+
+                } else if (e.getActionCommand().equals("delete")) {
+
+                    textarea1.setText(" ");
+                    textarea2.setText(" ");
+                } else {;}
+
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+
+
+        }
+
+    }
+}
