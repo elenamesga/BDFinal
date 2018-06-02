@@ -55,6 +55,25 @@
       <artifactId>mongo-java-driver</artifactId>
       <version>3.7.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/net.xqj/basex-xqj -->
+    <dependency>
+      <groupId>net.xqj</groupId>
+      <artifactId>basex-xqj</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.xqj2/xqj2 -->
+    <dependency>
+      <groupId>com.xqj2</groupId>
+      <artifactId>xqj2</artifactId>
+      <version>0.2.0</version>
+    </dependency>
   </dependencies>
+
+  <repositories>
+    <repository>
+      <id>xqj.net</id>
+      <url>http://xqj.net/maven</url>
+    </repository>
+  </repositories>
 
 </project>
