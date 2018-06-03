@@ -1,5 +1,6 @@
 package org.uma.bdbio2018.benchmark.contracts;
 
+import java.util.Properties;
 import org.uma.bdbio2018.benchmark.BenchmarkException;
 
 /**
@@ -7,7 +8,15 @@ import org.uma.bdbio2018.benchmark.BenchmarkException;
  *
  * @author Miguel González <sosa@uma.es>
  */
-public interface DBConnection extends Closeable {
+public abstract class DBConnection implements Closeable {
+
+    protected Properties props;
+    protected String driver;
+
+    public DBConnection(String d, Properties p) {
+        driver = d;
+        props = p;
+    }
 
     /**
      * Executes a query.
@@ -15,5 +24,5 @@ public interface DBConnection extends Closeable {
      * @param query String-represented query statement.
      * @throws BenchmarkException when query execution fails.
      */
-    void executeQuery(String query) throws BenchmarkException;
+    public abstract void executeQuery(String query) throws BenchmarkException;
 }

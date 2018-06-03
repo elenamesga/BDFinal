@@ -4,6 +4,7 @@ import java.util.Properties;
 import org.uma.bdbio2018.benchmark.connections.MariaDBConnection;
 import org.uma.bdbio2018.benchmark.connections.MySQLConnection;
 import org.uma.bdbio2018.benchmark.connections.PostgreSQLConnection;
+import org.uma.bdbio2018.benchmark.connections.RESTEXistDBConnection;
 import org.uma.bdbio2018.benchmark.connections.SQLiteConnection;
 import org.uma.bdbio2018.benchmark.contracts.DBConnection;
 
@@ -29,6 +30,8 @@ public class DBConnectionFactory {
                 return new PostgreSQLConnection(this.props, optimized);
             case "sqlite":
                 return new SQLiteConnection(this.props, optimized);
+            case "existdb":
+                return new RESTEXistDBConnection(this.props);
         }
         throw new BenchmarkException("Unrecognized or unsupported driver.");
     }

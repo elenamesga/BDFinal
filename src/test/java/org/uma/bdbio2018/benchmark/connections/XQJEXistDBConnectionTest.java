@@ -13,7 +13,7 @@ import com.xqj2.XQConnection2;
 /**
  * @author Miguel González <sosa@uma.es>
  **/
-public class ExistDBConnectionTest {
+public class XQJEXistDBConnectionTest {
 
     private XQConnection2 conn;
 
@@ -30,7 +30,7 @@ public class ExistDBConnectionTest {
     @Test
     public void shouldExistDBConnectAndExecuteAQuery() throws XQException {
         XQExpression xqe = conn.createExpression();
-        XQResultSequence rs = xqe.executeQuery("let $db := doc(\"db/bdbio40.xml\")/root\n"
+        XQResultSequence rs = xqe.executeQuery("let $db := doc(\"bdbio40.xml\")/root\n"
                 + "let $org := $db/organisms/record[kingdom = \"Metazoa\"]\n"
                 + "let $fb := $db/formed_by/record[organismID = $org/organismID]\n"
                 + "let $proteins := $db/proteins/record[entry = $fb/proteinEntry]\n"

@@ -11,17 +11,14 @@ import org.uma.bdbio2018.benchmark.BenchmarkException;
  *
  * @author Miguel González <sosa@uma.es>
  **/
-public abstract class SQLConnection implements DBConnection {
+public abstract class SQLConnection extends DBConnection {
 
-    protected String driver;
-    protected Properties props;
     protected Connection connection;
     protected boolean optimized;
 
     public SQLConnection(String driver, Properties properties, boolean optimized)
             throws BenchmarkException {
-        this.driver = driver;
-        this.props = properties;
+        super(driver, properties);
         this.optimized = optimized;
         connection = getConnection();
     }

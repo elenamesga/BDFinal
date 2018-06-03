@@ -13,7 +13,7 @@ import org.junit.Test;
 /**
  * @author Miguel González <sosa@uma.es>
  **/
-public class BaseXConnectionTest {
+public class XQJBaseXConnectionTest {
 
     private XQConnection conn;
 
