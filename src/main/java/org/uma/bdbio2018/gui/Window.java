@@ -17,6 +17,8 @@ import org.uma.bdbio2018.benchmark.contracts.DBConnection;
 import org.uma.bdbio2018.benchmark.DBBenchmark;
 import org.uma.bdbio2018.benchmark.BenchmarkException;
 import java.awt.event.*;
+import java.sql.SQLException;
+
 
 
 /**
@@ -45,9 +47,6 @@ public class Window extends JFrame {
 
     Font font;
 
-    //--------
-    Event event;
-
     //Constructor
 
     public Window() {
@@ -71,7 +70,7 @@ public class Window extends JFrame {
         this.getContentPane().setLayout(new GridBagLayout());
         constraints = new GridBagConstraints();
 
-        exist = new JButton("Exist");
+        exit = new JButton("Exit");
 
         delete = new JButton("Delete");
         send = new JButton("Send");
@@ -88,7 +87,7 @@ public class Window extends JFrame {
         combobox1.addItem("Mysql");
         combobox1.addItem("postgresql");
         combobox1.addItem("sqlite");
-        combobox1.addItem("Existdb")
+        combobox1.addItem("Existdb");
 
         //combobox2 = new JComboBox();
         //combobox1.addItem("Check database xml manager");
@@ -105,12 +104,11 @@ public class Window extends JFrame {
     public void EventsConfiguration() {
 
         send.addActionListener(new Eventos());
-        send.setActionCommand("send");
+        //send.setActionCommand("send");
         combobox1.addActionListener(new Eventos());
-        exist.addActionListener(new Eventos());
-        exist.setActionCommand("existdb");
+        exit.addActionListener(new Eventos());
         delete.addActionListener(new Eventos());
-        delete.setActionCommand("delete");
+        //delete.setActionCommand("delete");
 
     }
 
@@ -240,11 +238,17 @@ public class Window extends JFrame {
 
                     }
 
-                } else if (e.getActionCommand().equals("exist")) {
+                } else if (e.getActionCommand().equals("exit")) {
 
-                    System.exit(0);
-
-                    System.exit(0);
+                    try {
+                    
+                        Thread.sleep(500); 
+                        System.exit(0); 
+                
+                    } catch(Exception e){
+                    
+                        System.exit(0);
+                    }   
 
 
                 } else if (e.getActionCommand().equals("delete")) {
