@@ -118,27 +118,27 @@ public class Window extends JFrame {
     public void PositionComponents() {
 
         constraints.gridx = 3;
-        constraints.gridy = 5;
+        constraints.gridy = 6;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         this.getContentPane().add(delete, constraints);
 
         constraints.gridx = 4;
-        constraints.gridy = 5;
+        constraints.gridy = 6;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         this.getContentPane().add(send, constraints);
 
 
         constraints.gridx = 1;
-        constraints.gridy = 4;
+        constraints.gridy = 5;
         constraints.gridheight = 2;
         constraints.gridwidth = 2;
         this.getContentPane().add(textarea1, constraints);
 
 
         constraints.gridx = 4;
-        constraints.gridy = 4;
+        constraints.gridy = 5;
         constraints.gridheight = 1;
         constraints.gridwidth = 1;
         this.getContentPane().add(combobox1, constraints);
@@ -178,11 +178,16 @@ public class Window extends JFrame {
 
             DBConnection conection;
             Boolean optimized= true;
+            DBBenchmark benchmark;
+            long time;
+            
 
             Properties databaseConf = new Properties();
 
-            try (InputStream input = new FileInputStream(
-                    "./src/main/java/org.uma.bdbio2018/gui/databases.properties")) {
+            try (InputStream input = new FileInputStream( "" +
+            		"//Mac/Home/Desktop/B/BDFinal/src/main/java/org/uma/bdbio2018/gui/databases.properties"))
+   
+            	 {
 
                 databaseConf.load(input);
                 DBConnectionFactory ConectionFactory= new DBConnectionFactory(databaseConf);
@@ -218,7 +223,9 @@ public class Window extends JFrame {
 
                         conection = ConectionFactory.makeConnection(gestor, optimized);
                         DBBenchmark.Executor ex = new DBBenchmark.Executor(conection);
-                        ex.executeQuery(consulta);
+                        benchmark = ex.executeQuery(consulta);
+                        time = benchmark.getExecutingStatementDuration();
+                        textarea2.setText("Required time:"+ " " + time);
 
                     } catch(BenchmarkException exception){
 
