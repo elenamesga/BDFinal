@@ -17,8 +17,8 @@ public class XQJEXistDBConnection extends DBConnection {
 
     private XQConnection2 conn;
 
-    public XQJEXistDBConnection(String d, Properties p) throws BenchmarkException {
-        super(d, p);
+    public XQJEXistDBConnection(Properties p) throws BenchmarkException {
+        super("existdb", p);
         XQDataSource xds;
         try {
             xds = new ExistXQDataSource();

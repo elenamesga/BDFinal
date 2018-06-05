@@ -1,48 +1,45 @@
 package org.uma.bdbio2018.benchmark.connections;
 
-import javax.xml.xquery.XQDataSource;
-import javax.xml.xquery.XQException;
-import javax.xml.xquery.XQExpression;
-import javax.xml.xquery.XQResultSequence;
-import net.xqj.exist.ExistXQDataSource;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import com.xqj2.XQConnection2;
+import org.uma.bdbio2018.benchmark.BenchmarkException;
 
 /**
  * @author Miguel González <sosa@uma.es>
  **/
 public class XQJEXistDBConnectionTest {
 
-    private XQConnection2 conn;
+    private XQJEXistDBConnection edbc;
 
     @Before
-    public void setUp() throws XQException {
-        XQDataSource xqs = new ExistXQDataSource();
-        xqs.setProperty("serverName", "172.17.0.1");
-        xqs.setProperty("port", "9080");
-        xqs.setProperty("user", "admin");
-        xqs.setProperty("password", "");
-        conn = (XQConnection2) xqs.getConnection();
+    public void setUp() throws BenchmarkException {
+        Properties props = new Properties();
+
+        try (InputStream input = new FileInputStream(
+                "./src/main/resources/databases.properties")) {
+            props.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        edbc = new XQJEXistDBConnection(props);
     }
 
     @Test
-    public void shouldExistDBConnectAndExecuteAQuery() throws XQException {
-        XQExpression xqe = conn.createExpression();
-        XQResultSequence rs = xqe.executeQuery("let $db := doc(\"bdbio40.xml\")/root\n"
+    public void shouldExistDBConnectAndExecuteAQuery() throws BenchmarkException {
+        edbc.executeQuery("let $db := doc(\"bdbio40.xml\")/root\n"
                 + "let $org := $db/organisms/record[kingdom = \"Metazoa\"]\n"
                 + "let $fb := $db/formed_by/record[organismID = $org/organismID]\n"
                 + "let $proteins := $db/proteins/record[entry = $fb/proteinEntry]\n"
                 + "return $proteins");
-        while(rs.next()) {
-            System.out.println(rs.getItemAsString(null));
-        }
-        xqe.close();
     }
 
     @After
-    public void tearDown() throws XQException {
-        conn.close();
+    public void tearDown() throws BenchmarkException {
+        edbc.close();
     }
 }

@@ -8,12 +8,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.uma.bdbio2018.benchmark.BenchmarkException;
+import org.uma.bdbio2018.benchmark.DBConnectionFactory;
+import org.uma.bdbio2018.benchmark.contracts.DBConnection;
 
 /**
  * @author Miguel González <sosa@uma.es>
  **/
 public class RESTEXistDBConnectionTest {
-    private RESTEXistDBConnection exc;
+    private DBConnection exc;
 
     @Before
     public void setUp() throws BenchmarkException {
@@ -25,16 +27,14 @@ public class RESTEXistDBConnectionTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        exc = new RESTEXistDBConnection(props);
+        exc = (new DBConnectionFactory(props)).makeConnection("existdb", true);
     }
 
     @Test
     public void shouldEXistDBConnectionDoARequest() throws BenchmarkException {
-        exc.executeQuery("let $db := doc(\"bdbio40.xml\")/root\n"
-                + "\tlet $org := $db/organisms/record[kingdom = \"Metazoa\"]\n"
-                + "\tlet $fb := $db/formed_by/record[organismID = $org/organismID]\n"
-                + "\tlet $proteinas := $db/proteins/record[entry = $fb/proteinEntry]\n"
-                + "\treturn count($proteinas)");
+        exc.executeQuery("let $db := doc(\"bdbio40.xml\")\n"
+                + "let $dateof := $db//date_of/record[lastModification < '2018-03-1']\n"
+                + "return $db//proteins/record[entry = $dateof/proteinEntry]");
     }
 
     @After

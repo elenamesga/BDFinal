@@ -17,7 +17,7 @@ public class RESTEXistDBConnection extends DBConnection {
     private static final String QUERY_SKELETON =
             "<query xmlns=\"http://exist.sourceforge.net/NS/exist\">\n"
                     + "    <text>\n"
-                    + "%s"
+                    + "<![CDATA[%s]]>"
                     + "    </text>\n"
                     + "</query>";
     private RESTConsumer httpClient;

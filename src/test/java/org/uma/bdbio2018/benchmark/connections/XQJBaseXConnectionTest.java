@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * Fails probably because of an issue on the XQJ BaseX implementation.
+ *
  * @author Miguel González <sosa@uma.es>
  **/
 public class XQJBaseXConnectionTest {
