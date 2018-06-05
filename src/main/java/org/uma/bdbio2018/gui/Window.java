@@ -37,7 +37,7 @@ public class Window extends JFrame {
     JCheckBox checkbox; //optimize database
 
     JComboBox combobox1; // check database manager
-    JComboBox<String> combobox2; //check database language
+    //JComboBox<String> combobox2; //check database language
 
     GridBagConstraints constraints; // elements position
 
@@ -88,13 +88,12 @@ public class Window extends JFrame {
         combobox1.addItem("Mysql");
         combobox1.addItem("postgresql");
         combobox1.addItem("sqlite");
+        combobox1.addItem("Existdb")
 
-        combobox2 = new JComboBox();
-        combobox2.addItem("Type of request");
-        combobox2.addItem("Xquery");
-        combobox2.addItem("Sql");
-
-
+        //combobox2 = new JComboBox();
+        //combobox1.addItem("Check database xml manager");
+        //combobox2.addItem("sql");
+        
     }
 
     public void ButtonConfiguration() {
@@ -109,7 +108,7 @@ public class Window extends JFrame {
         send.setActionCommand("send");
         combobox1.addActionListener(new Eventos());
         exist.addActionListener(new Eventos());
-        exist.setActionCommand("exist");
+        exist.setActionCommand("existdb");
         delete.addActionListener(new Eventos());
         delete.setActionCommand("delete");
 
@@ -138,17 +137,20 @@ public class Window extends JFrame {
 
 
         constraints.gridx = 4;
-        constraints.gridy = 5;
-        constraints.gridheight = 1;
-        constraints.gridwidth = 1;
-        this.getContentPane().add(combobox1, constraints);
-
-        constraints.gridx = 4;
         constraints.gridy = 3;
         constraints.gridheight = 1;
         constraints.gridwidth = 1;
+        this.getContentPane().add(combobox1, constraints);
+        
+        /*
+        constraints.gridx = 4;
+        constraints.gridy = 4;
+        constraints.gridheight = 1;
+        constraints.gridwidth = 1;
         this.getContentPane().add(combobox2, constraints);
-
+        
+         */
+        
         constraints.gridx = 4;
         constraints.gridy = 2;
         constraints.gridheight = 1;
@@ -217,6 +219,11 @@ public class Window extends JFrame {
                         else if(combobox1.getSelectedItem() == "sqlite"){
 
                             gestor = "sqlite";
+                        }
+
+                        else if(combobox1.getSelectedItem() == "existdb"){
+
+                            gestor = "existdb";
                         }
 
                         else{;}
