@@ -90,10 +90,6 @@ public class Window extends JFrame {
         combobox1.addItem("sqlite");
         combobox1.addItem("existdb");
 
-        //combobox2 = new JComboBox();
-        //combobox1.addItem("Check database xml manager");
-        //combobox2.addItem("sql");
-
     }
 
     private void ButtonConfiguration() {
@@ -118,40 +114,33 @@ public class Window extends JFrame {
     private void PositionComponents() {
 
         constraints.gridx = 3;
-        constraints.gridy = 6;
+        constraints.gridy = 4;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         this.getContentPane().add(delete, constraints);
 
         constraints.gridx = 4;
-        constraints.gridy = 6;
+        constraints.gridy = 4;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         this.getContentPane().add(send, constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = 5;
+        constraints.gridy = 3;
         constraints.gridheight = 2;
         constraints.gridwidth = 2;
+        constraints.weighty = 1;
+        constraints.weightx = 2;
         this.getContentPane().add(textarea1, constraints);
 
         constraints.gridx = 4;
-        constraints.gridy = 3;
+        constraints.gridy = 2;
         constraints.gridheight = 1;
         constraints.gridwidth = 1;
         this.getContentPane().add(combobox1, constraints);
         
-        /*
         constraints.gridx = 4;
-        constraints.gridy = 4;
-        constraints.gridheight = 1;
-        constraints.gridwidth = 1;
-        this.getContentPane().add(combobox2, constraints);
-        
-         */
-
-        constraints.gridx = 4;
-        constraints.gridy = 2;
+        constraints.gridy = 1;
         constraints.gridheight = 1;
         constraints.gridwidth = 1;
         this.getContentPane().add(checkbox, constraints);
