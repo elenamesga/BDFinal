@@ -4,7 +4,7 @@ import com.xqj2.XQConnection2;
 import java.util.Properties;
 import javax.xml.xquery.XQDataSource;
 import javax.xml.xquery.XQException;
-#import net.xqj.exist.ExistXQDataSource;
+import net.xqj.exist.ExistXQDataSource;
 import org.uma.bdbio2018.benchmark.BenchmarkException;
 import org.uma.bdbio2018.benchmark.contracts.DBConnection;
 
