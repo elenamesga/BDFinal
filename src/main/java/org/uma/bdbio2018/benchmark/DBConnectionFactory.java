@@ -11,7 +11,7 @@ import org.uma.bdbio2018.benchmark.contracts.DBConnection;
 
 
 /**
- * Factory for make {@code DBConnection}s.
+ * Factory for making {@code DBConnection}s.
  * @author Miguel González <sosa@uma.es>
  **/
 public class DBConnectionFactory {
